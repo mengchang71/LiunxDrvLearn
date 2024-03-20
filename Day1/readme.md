@@ -87,5 +87,6 @@ make clean
 [ 6521.668400] Goodbey linux_driver_module
 ```
 
-**Day1 Complete**
+**Day1 Complete！！！**
+
 ![内核功能划分](https://github.com/mengchang71/LiunxDrvLearn/blob/main/images/img_Day1/%E5%86%85%E6%A0%B8%E5%8A%9F%E8%83%BD%E5%88%92%E5%88%86.png)
