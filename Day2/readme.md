@@ -169,4 +169,4 @@ struct file_operations {
 
 ```
 
-![字符设备驱动的结构]https://github.com/mengchang71/LiunxDrvLearn/blob/main/images/img_Day2/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%9A%84%E7%BB%93%E6%9E%84.png
+![字符设备驱动的结构](https://github.com/mengchang71/LiunxDrvLearn/blob/main/images/img_Day2/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%9A%84%E7%BB%93%E6%9E%84.png)
