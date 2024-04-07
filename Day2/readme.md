@@ -1,4 +1,4 @@
-# Day2 编写一个完整的字符设备驱动程序
+# Day2 了解一个字符设备驱动程序的结构
 
 ## 一 主设备号和次设备号
 
@@ -155,18 +155,88 @@ struct file_operations {
 
 ## 5.3 字符设备驱动模块加载与卸载
 > 代码清单 5.5 字符设备驱动模块加载与卸载函数模板
-``` c
+``` c {.line-numbers}
+/* 设备结构体 */
+struct xxx_dev_t {
+  struct cdev cdev;
+  (...)
+} xxx_dev;
 
+/* 设备驱动模块加载函数 */
+static int _ _init xxx_init(void)
+{
+  (...)
+  cdev_init(&xxx_dev.cdev, &xxx_fops);  /* 初始化cdev */
+  xxx_dev.cdev.owner = THIS_MODULE;
+  /* 获取设备字符号 */
+  if (xxx_major) {
+    register_chrdev_region(xxx_dev_no, 1, DEV_NAME);
+  } else {
+    alloc_chrdev_region(&xxx_dev_no, 0, 1, DEV_NAME);
+  }
+
+  ret = cdev_add(&xxx_dev.cdev, xxx_dev_no, 1); /* 注册设备 */
+  (...)
+}
+
+/* 设备驱动模块卸载函数 */
+static void __exit xxx_exit(void)
+{
+  unregister_chrdev_region(xxx_dev_no, 1); /*  释放占用的设备号 */
+  cdev_del(&xxx_dev.cdev); /*  注销设备 */
+  (...)
+}
 ```
 
 > 代码清单 5.6 字符设备驱动读、写、I/O控制函数模板
-``` c
+``` c {.line-numbers}
+/*  读设备 */
+ssize_t xxx_read(struct file *filp, char __user *buf, size_t count,
+  loff_t*f_pos)
+{
+  (...)
+  copy_to_user(buf, ..., ...);
+  (...)
+}
 
+/*  写设备 */
+ssize_t xxx_write(struct file *filp, const char __user *buf, size_t count,
+  loff_t *f_pos)
+{
+  (...)
+  copy_from_user(..., buf, ...);
+  (...)
+}
+
+/* ioctl 函数 */
+long xxx_ioctl(struct file *filp, unsigned int cmd,
+  unsigned long arg)
+{
+  (...)
+  switch (cmd) {
+  case XXX_CMD1:
+    (...)
+    break;
+  case XXX_CMD2:
+    (...)
+    break;
+  default:
+    /*  不能支持的命令 */
+    return - ENOTTY;
+  }
+  return 0;
+}
 ```
 
 > 代码清单 5.7 字符设备驱动文件操作结构体模板
 ``` c
-
+struct file_operations xxx_fops = {
+  .owner = THIS_MODULE,
+  .read = xxx_read,
+  .write = xxx_write,
+  .unlocked_ioctl= xxx_ioctl,
+  (...)
+};
 ```
 
 ![字符设备驱动的结构](https://github.com/mengchang71/LiunxDrvLearn/blob/main/images/img_Day2/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%9A%84%E7%BB%93%E6%9E%84.png)
