@@ -56,5 +56,5 @@ module_exit(globalmem_exit);
 ```
 
 ### 1.3、执行结果
-![执行结果_内核打印]()
+![执行结果_内核打印](https://github.com/mengchang71/LiunxDrvLearn/blob/main/images/img_Day3/1.3_%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png)
 ---
