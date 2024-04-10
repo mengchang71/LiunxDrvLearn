@@ -156,7 +156,7 @@ insmod globalmem.ko
 cat /proc/devices
 ```
 输出
-![2.5.1查看设备结果]()
+![2.5.1查看设备结果](https://github.com/mengchang71/LiunxDrvLearn/blob/main/images/img_Day3/2.5.1.png)
 
 ``` bash
 mknod /dev/globalmem c 230 0
@@ -164,4 +164,4 @@ echo "hello world" > /dev/globalmem
 cat /dev/globalmem
 ```
 输出
-![2.5.2设备输出]()
+![2.5.2设备输出](https://github.com/mengchang71/LiunxDrvLearn/blob/main/images/img_Day3/2.5.2.png)
